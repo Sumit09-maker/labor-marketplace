@@ -1,0 +1,235 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  /* Professional deep-navy brand scale */
+  --color-brand-50: #eef4f9;
+  --color-brand-100: #d9e6f1;
+  --color-brand-200: #b3cce3;
+  --color-brand-300: #84abd0;
+  --color-brand-400: #5485b7;
+  --color-brand-500: #35689c;
+  --color-brand-600: #26537f;
+  --color-brand-700: #1f4268;
+  --color-brand-800: #1a3454;
+  --color-brand-900: #122640;
+  --color-brand-950: #0b1a2e;
+  /* Warm construction-amber accent */
+  --color-saffron-50: #fff8eb;
+  --color-saffron-100: #ffefc7;
+  --color-saffron-200: #ffdd88;
+  --color-saffron-300: #ffc84a;
+  --color-saffron-400: #ffb020;
+  --color-saffron-500: #f59e0b;
+  --color-saffron-600: #d97706;
+  --color-saffron-700: #b45309;
+  --color-saffron-800: #92400e;
+  --color-saffron-900: #78350f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #f8fafc;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #f59e0b;
+  color: #0b1a2e;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes lc-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes lc-fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes lc-slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes lc-slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes lc-pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 44px rgba(245, 158, 11, 0.5);
+  }
+}
+@keyframes lc-bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes lc-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes lc-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+@keyframes lc-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@keyframes lc-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-float {
+  animation: lc-float 3s ease-in-out infinite;
+}
+.animate-fade-in-up {
+  animation: lc-fade-in-up 0.8s ease-out forwards;
+}
+.animate-slide-in-left {
+  animation: lc-slide-in-left 0.8s ease-out forwards;
+}
+.animate-slide-in-right {
+  animation: lc-slide-in-right 0.8s ease-out forwards;
+}
+.animate-pulse-glow {
+  animation: lc-pulse-glow 2s ease-in-out infinite;
+}
+.animate-bounce-slow {
+  animation: lc-bounce-slow 2s ease-in-out infinite;
+}
+.animate-fade-in {
+  animation: lc-fade-in 0.3s ease-out forwards;
+}
+.animate-shake {
+  animation: lc-shake 0.5s ease-in-out;
+}
+.animate-marquee {
+  animation: lc-marquee 32s linear infinite;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+}
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Leaflet overrides ---------- */
+.leaflet-container {
+  font-family: var(--font-sans);
+  z-index: 0;
+}
+.lc-pin {
+  background: transparent;
+  border: none;
+}
+.lc-popup .leaflet-popup-content-wrapper {
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+}
+.lc-popup .leaflet-popup-content {
+  margin: 12px 14px;
+  font-family: var(--font-sans);
+  min-width: 180px;
+}
+
+/* ---------- Misc ---------- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.text-stroke-white {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.55);
+  color: transparent;
+}
